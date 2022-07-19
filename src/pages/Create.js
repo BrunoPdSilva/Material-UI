@@ -1,11 +1,28 @@
 import React from "react";
-import { Typography, Button, Container } from "@material-ui/core";
-import { AcUnitOutlined, Send, KeyboardArrowRight } from "@material-ui/icons";
+import { Typography, Button, Container, makeStyles } from "@material-ui/core";
+import { KeyboardArrowRight } from "@material-ui/icons";
+
+const useStyles = makeStyles({
+  btn: {
+    fontSize: 60,
+    backgroundColor: "violet",
+    "&:hover": {
+      backgroundColor: "blue",
+    },
+  },
+  title: {
+    textDecoration: "underline",
+    marginBottom: 20,
+  },
+});
 
 export default function Create() {
+  const classes = useStyles();
+
   return (
     <Container>
       <Typography
+        className={classes.title}
         variant="h6"
         component="h2"
         color="textSecondary"
@@ -15,24 +32,15 @@ export default function Create() {
       </Typography>
 
       <Button
+        className={classes.btn}
         onClick={() => console.log("You clicked me")}
         type="submit"
         color="secondary"
         variant="contained"
-        //startIcon={<Send />}
         endIcon={<KeyboardArrowRight />}
       >
         Submit
       </Button>
-
-      {/* Icons */}<br />
-      {/* <AcUnitOutlined />
-      <AcUnitOutlined color="primary" fontSize="large" />
-      <AcUnitOutlined color="secondary" fontSize="small" />
-      <AcUnitOutlined color="action" fontSize="small" />
-      <AcUnitOutlined color="error" fontSize="small" />
-      <AcUnitOutlined color="disabled" fontSize="small" /> */}
-
     </Container>
   );
 }

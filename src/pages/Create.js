@@ -2,19 +2,7 @@ import React from "react";
 import { Typography, Button, Container, makeStyles } from "@material-ui/core";
 import { KeyboardArrowRight } from "@material-ui/icons";
 
-const useStyles = makeStyles({
-  btn: {
-    fontSize: 60,
-    backgroundColor: "violet",
-    "&:hover": {
-      backgroundColor: "blue",
-    },
-  },
-  title: {
-    textDecoration: "underline",
-    marginBottom: 20,
-  },
-});
+const useStyles = makeStyles({});
 
 export default function Create() {
   const classes = useStyles();
@@ -22,7 +10,6 @@ export default function Create() {
   return (
     <Container>
       <Typography
-        className={classes.title}
         variant="h6"
         component="h2"
         color="textSecondary"
@@ -32,10 +19,9 @@ export default function Create() {
       </Typography>
 
       <Button
-        className={classes.btn}
         onClick={() => console.log("You clicked me")}
         type="submit"
-        color="secondary"
+        color="primary"
         variant="contained"
         endIcon={<KeyboardArrowRight />}
       >

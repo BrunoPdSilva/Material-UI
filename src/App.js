@@ -8,9 +8,17 @@ import Create from "./pages/Create";
 const theme = createTheme({
   palette: {
     primary: {
-      main: "#e8f5e9"
+      main: green[500]
     },
   },
+  typography: {
+    fontFamily: "Quicksand",
+    fontWeightLight: 400,
+    fontWeightRegular: 500,
+    fontWeightMedium: 600,
+    fontWeightBold: 700,
+
+  }
 });
 
 function App() {

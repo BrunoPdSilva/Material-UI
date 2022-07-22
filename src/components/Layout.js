@@ -6,18 +6,24 @@ import {
   ListItem,
   ListItemIcon,
   ListItemText,
+  AppBar,
+  Toolbar,
 } from "@material-ui/core";
 import { AddCircleOutlineOutlined, SubjectOutlined } from "@material-ui/icons";
 import { useHistory, useLocation } from "react-router-dom";
+import { format } from 'date-fns'
 
 const drawerWidth = 240;
 
-const useStyles = makeStyles((theme) => {
+const useStyles = makeStyles(theme => {
   return {
     page: {
-      backgroundColor: "#f9f9f9",
+      background: "#f9f9f9",
       width: "100%",
-      padding: theme.spacing(3)
+      padding: theme.spacing(3),
+    },
+    root: {
+      display: "flex",
     },
     drawer: {
       width: drawerWidth,
@@ -25,15 +31,20 @@ const useStyles = makeStyles((theme) => {
     drawerPaper: {
       width: drawerWidth,
     },
-    root: {
-      display: "flex",
-    },
     active: {
-      backgroundColor: "#f4f4f4",
+      background: "#f4f4f4",
     },
     title: {
-      padding: theme.spacing(2)
-    }
+      padding: theme.spacing(2),
+    },
+    appBar: {
+      width: `calc(100% - ${drawerWidth}px)`,
+      marginLeft: drawerWidth,
+    },
+    date: {
+      flexGrow: 1,
+    },
+    toolbar: theme.mixins.toolbar,
   };
 });
 
@@ -45,12 +56,12 @@ export function Layout({ children }) {
   const menuItems = [
     {
       text: "My Notes",
-      icon: <SubjectOutlined color="secondary" path="/" />,
+      icon: <SubjectOutlined color="secondary" />,
       path: "/",
     },
     {
-      text: "Create Notes",
-      icon: <AddCircleOutlineOutlined color="secondary" path="/create" />,
+      text: "Create Note",
+      icon: <AddCircleOutlineOutlined color="secondary" />,
       path: "/create",
     },
   ];
@@ -58,37 +69,54 @@ export function Layout({ children }) {
   return (
     <div className={classes.root}>
       {/* app bar */}
+      <AppBar
+        position="fixed"
+        className={classes.appBar}
+        elevation={0}
+        color="primary"
+      >
+        <Toolbar>
+          <Typography className={classes.date}>
+            Today is the {format(new Date(), "do MMMM Y")}
+          </Typography>
+          <Typography>Mario</Typography>
+        </Toolbar>
+      </AppBar>
 
       {/* side drawer */}
       <Drawer
         className={classes.drawer}
         variant="permanent"
-        anchor="left"
         classes={{ paper: classes.drawerPaper }}
+        anchor="left"
       >
         <div>
-          <Typography variant="h5" className={classes.title}>Ninja Notes</Typography>
+          <Typography variant="h5" className={classes.title}>
+            Ninja Notes
+          </Typography>
         </div>
 
-        {/* List  / Links */}
+        {/* links/list section */}
         <List>
           {menuItems.map(item => (
             <ListItem
               button
               key={item.text}
               onClick={() => history.push(item.path)}
-              className={
-                location.pathname === item.path ? classes.active : null
-              }
+              className={location.pathname == item.path ? classes.active : null}
             >
               <ListItemIcon>{item.icon}</ListItemIcon>
-              <ListItemText primary={item.text}></ListItemText>
+              <ListItemText primary={item.text} />
             </ListItem>
           ))}
         </List>
       </Drawer>
 
-      <div className={classes.page}>{children}</div>
+      {/* main content */}
+      <div className={classes.page}>
+        <div className={classes.toolbar}></div>
+        {children}
+      </div>
     </div>
   );
 }

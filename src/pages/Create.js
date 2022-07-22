@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
+
+// COMPONENTS
 import {
   Typography,
   Button,
@@ -12,7 +15,6 @@ import {
   FormLabel,
 } from "@material-ui/core";
 import { KeyboardArrowRight } from "@material-ui/icons";
-import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles({
   field: {
@@ -23,14 +25,14 @@ const useStyles = makeStyles({
 });
 
 export default function Create() {
-  const [title, setTitle] = useState("");
-  const [details, setDetails] = useState("");
   const [titleError, setTitleError] = useState(false);
   const [detailsError, setDetailsError] = useState(false);
+
+  const [title, setTitle] = useState("");
+  const [details, setDetails] = useState("");
   const [category, setCategory] = useState("todos");
 
   const history = useHistory();
-
   const classes = useStyles();
 
   const handleSubmit = e => {
@@ -39,11 +41,11 @@ export default function Create() {
     setTitleError(false);
     setDetailsError(false);
 
-    if (title == "") {
+    if (title === "") {
       setTitleError(true);
     }
 
-    if (details == "") {
+    if (details === "") {
       setDetailsError(true);
     }
 
@@ -120,3 +122,4 @@ export default function Create() {
     </Container>
   );
 }
+

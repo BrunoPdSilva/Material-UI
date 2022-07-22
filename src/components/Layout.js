@@ -8,6 +8,7 @@ import {
   ListItemText,
   AppBar,
   Toolbar,
+  Avatar
 } from "@material-ui/core";
 import { AddCircleOutlineOutlined, SubjectOutlined } from "@material-ui/icons";
 import { useHistory, useLocation } from "react-router-dom";
@@ -41,11 +42,14 @@ const useStyles = makeStyles(theme => {
       width: `calc(100% - ${drawerWidth}px)`,
       marginLeft: drawerWidth,
     },
+    toolbar: theme.mixins.toolbar,
     date: {
       flexGrow: 1,
     },
-    toolbar: theme.mixins.toolbar,
-  };
+    avatar: {
+      marginLeft: theme.spacing(2)
+    }
+  }
 });
 
 export function Layout({ children }) {
@@ -80,6 +84,7 @@ export function Layout({ children }) {
             Today is the {format(new Date(), "do MMMM Y")}
           </Typography>
           <Typography>Mario</Typography>
+          <Avatar src="./mario-av.png" className={classes.avatar} />
         </Toolbar>
       </AppBar>
 

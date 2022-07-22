@@ -1,13 +1,32 @@
-import React from 'react'
+import React from "react";
 
-import { Card, CardHeader, CardContent, IconButton, Typography } from "@material-ui/core"
-import { DeleteOutlineOutlined } from '@material-ui/icons'
+import {
+  Card,
+  CardHeader,
+  CardContent,
+  IconButton,
+  Typography,
+  makeStyles,
+} from "@material-ui/core";
+import { DeleteOutlineOutlined } from "@material-ui/icons";
+
+const useStyles = makeStyles({
+  test: {
+    border: note => {
+      if (note.category === "work") {
+        return "1px solid red";
+      }
+    },
+  },
+});
 
 export function NoteCard({ note, handleDelete }) {
+  const classes = useStyles(note);
+
   return (
     <div>
-      <Card elevation={3}>
-        <CardHeader 
+      <Card elevation={3} className={classes.test}>
+        <CardHeader
           action={
             <IconButton onClick={() => handleDelete(note.id)}>
               <DeleteOutlineOutlined />
@@ -23,5 +42,5 @@ export function NoteCard({ note, handleDelete }) {
         </CardContent>
       </Card>
     </div>
-  )
+  );
 }
